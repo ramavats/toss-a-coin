@@ -15,7 +15,7 @@ function App() {
       const outcome = Math.random() < 0.5 ? 'Heads' : 'Tails';
       setResult(outcome);
       setIsFlipping(false);
-    }, 3000); // 3 seconds delay
+    }, 1500); // 1.5 seconds delay
   };
 
   // Optional: If you want to randomly set the initial state on load
