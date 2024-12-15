@@ -1,0 +1,112 @@
+:root {
+  --background-color: #f0f0f0; /* Light mode background */
+  --text-color: #000; /* Light mode text color */
+  --button-background: #4CAF50; /* Light mode button background */
+  --button-hover: #45a049; /* Light mode button hover */
+  --coin-heads-bg: linear-gradient(145deg, #f0c27b, #4b1248); /* Light mode heads */
+  --coin-tails-bg: linear-gradient(145deg, #4b1248, #f0c27b); /* Light mode tails */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background-color: #1a1a1a; /* Dark mode background */
+    --text-color: #fff; /* Dark mode text color */
+    --button-background: #3e8e41; /* Dark mode button background */
+    --button-hover: #367c3c; /* Dark mode button hover */
+    --coin-heads-bg: linear-gradient(145deg, #4b1248, #f0c27b); /* Dark mode heads */
+    --coin-tails-bg: linear-gradient(145deg, #f0c27b, #4b1248); /* Dark mode tails */
+  }
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  position: relative; /* Allow absolute positioning of children */
+}
+
+.App {
+  text-align: center;
+}
+
+.coin {
+  width: 150px; /* Increased size */
+  height: 150px; /* Increased size */
+  border-radius: 50%;
+  position: relative;
+  margin: 0 auto;
+  perspective: 1000px; /* Add perspective for 3D effect */
+}
+
+.coin-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px; /* Increased font size */
+  color: var(--text-color); /* Text color based on theme */
+  backface-visibility: hidden; /* Hide the back face */
+  transition: transform 1.2s; /* Smooth transition, increased duration */
+}
+
+.heads {
+  background: var(--coin-heads-bg); /* Background based on theme */
+  box-shadow:  5px 5px 15px rgba(0, 0, 0, 0.2),
+               -5px -5px 15px rgba(255, 255, 255, 0.5);
+}
+
+.tails {
+  background: var(--coin-tails-bg); /* Background based on theme */
+  box-shadow:  5px 5px 15px rgba(0, 0, 0, 0.2),
+               -5px -5px 15px rgba(255, 255, 255, 0.5);
+  transform: rotateY(180deg); /* Rotate the back face */
+}
+
+.flipping .heads {
+  transform: rotateY(160deg); /* Flip to show tails, but keep part of heads visible */
+}
+
+.flipping .tails {
+  transform: rotateY(0deg); /* Show tails */
+}
+
+.coin-face.show {
+  backface-visibility: hidden; /* Ensure the back face is hidden */
+  transform: rotateY(0deg); /* Show the correct face */
+}
+
+.coin-face:not(.show) {
+  transform: rotateY(180deg); /* Hide the face that is not showing */
+}
+
+button {
+  position: absolute;
+  bottom: 30px; /* Position at the bottom with margin */
+  left: 50%;
+  transform: translateX(-50%); /* Center horizontally */
+  padding: 15px 30px; /* Increased padding */
+  font-size: 18px; /* Increased font size */
+  background-color: var(--button-background); /* Button background based on theme */
+  color: var(--text-color); /* Button text color based on theme */
+  border: none; /* No border */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor */
+  transition: background-color 0.3s; /* Smooth background color transition */
+}
+
+button:hover {
+  background-color: var(--button-hover); /* Button hover color based on theme */
+}
