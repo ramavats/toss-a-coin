@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import coinFlipSound from './coin-flip.mp3'; // Make sure to have this sound file in the src folder
 
 function App() {
-  const [result, setResult] = useState('');
+  const [result, setResult] = useState('Heads'); // Set initial state to 'Heads'
   const [isFlipping, setIsFlipping] = useState(false);
 
   const flipCoin = () => {
@@ -15,8 +15,14 @@ function App() {
       const outcome = Math.random() < 0.5 ? 'Heads' : 'Tails';
       setResult(outcome);
       setIsFlipping(false);
-    }, 2000); // 3 seconds delay
+    }, 3000); // 3 seconds delay
   };
+
+  // Optional: If you want to randomly set the initial state on load
+  useEffect(() => {
+    const initialOutcome = Math.random() < 0.5 ? 'Heads' : 'Tails';
+    setResult(initialOutcome);
+  }, []);
 
   return (
     <div className="App">
